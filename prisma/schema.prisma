@@ -11,34 +11,38 @@ generator client {
 
 //Data models
 model User {
-  id  Int @id @default(autoinrement())
+  id  Int @id @default(autoincrement())
   fullname  String?
   email String  @unique
-  posts [Post]
+  posts Post[]
+  comments Comment[]
 }
 
 model Post {
-  id  Int @id  @default(autoinrement())
+  id  Int @id  @default(autoincrement())
   title String?
   body  String?
   author  User? @relation(fields: [authorId], references: [id])
   authorId  Int?
+  comments Comment[]
+  liked Like[]
 }
 
 model Comment {
-  id  Int @id @default(autoinrement())
+  id  Int @id @default(autoincrement())
   body  String?
-  author  User? @relation(fields: [authorId], references: [id])
-  authorId User?
-  post  Post? @relation(fields: [postId], references: [id])
+  author User? @relation(fields: [authorId], references: [id])
+  authorId Int
+  post Post? @relation(fields: [postId], references: [id])
   postId Int?
+  liked Like[]
 }
 
 model Like {
-  id Int @id @default(autoinrement())
+  id Int @id @default(autoincrement())
   liked Boolean @default(false)
-  author User? @relation(fields: [authorId], references: [id])
-  authorId Int?
   post Post? @relation(fields: [postId], references: [id])
-  postId Int?
+  postId Int
+  comment Comment? @relation(fields: [commentId], references: [id])
+  commentId Int?
 }
