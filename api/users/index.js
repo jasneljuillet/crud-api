@@ -2,7 +2,7 @@ const express = require('express');
 const router = express.Router();
 const { PrismaClient } = require('@prisma/client');
 const prisma = new PrismaClient();
-const  { findAll, create } = require('../../util/user');
+const  { findAll, create, deleteUser }  = require('../../util/user');
 
 module.exports.findAll = async (req, res) => {
     const users = await findAll();
@@ -12,10 +12,19 @@ module.exports.findAll = async (req, res) => {
 
 module.exports.create = async (req, res) => {
     const body = {
-        fullname: 'Vilsaint Ebrans',
-        email: 'ebrans@gmail.com'
+        fullname: 'Jean Pierre Peterson',
+        email: 'peterson@gmail.com'
     };
 
     const user = await create(body);
-    res.json(user);
+    res.json({create: user});
+}
+
+module.exports.delete = async (req, res) => {
+    const id = {
+        id: 5
+    }
+
+   const user = await deleteUser(id);
+   res.json({ delete: true });
 }
