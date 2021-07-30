@@ -22,9 +22,15 @@ module.exports.create = async (req, res) => {
 
 module.exports.delete = async (req, res) => {
     const id = {
-        id: 5
-    }
+        id: 6
+    };
 
-   const user = await deleteUser(id);
-   res.json({ delete: true });
+   const user = await deleteUser(id)
+   .then( () => {
+    res.json({ delete: true})
+   })
+   .catch( (err) => {
+    res.json({msg: err.meta.cause});
+   });
+
 }
