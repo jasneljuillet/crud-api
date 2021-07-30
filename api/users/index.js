@@ -27,7 +27,7 @@ module.exports.delete = async (req, res) => {
 
    const user = await deleteUser(id)
    .then( () => {
-    res.json({ delete: true})
+    res.json({ delete: true});
    })
    .catch( (err) => {
     res.json({msg: err.meta.cause});
