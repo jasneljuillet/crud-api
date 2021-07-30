@@ -1,13 +1,13 @@
 const express = require('express');
 const app = express();
-
+const user = require('./api/users/');
 
 app.get('/', (req, res) => res.json({ succes: true }));
 
 // user endpoint
-app.get('/api/users', require('./api/users').findAll);
-app.post('/api/users', require('./api/users').create);
-
+app.get('/api/users', user.findAll);
+app.post('/api/users', user.create);
+app.delete('/api/users/', user.delete);
 
 const PORT = 4500 || process.env.PORT;
 app.listen(PORT, () => console.log(`Listen on port ${PORT}`));
