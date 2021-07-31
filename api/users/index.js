@@ -2,7 +2,7 @@ const express = require('express');
 const router = express.Router();
 const { PrismaClient } = require('@prisma/client');
 const prisma = new PrismaClient();
-const  { findAll, create, deleteUser, updateUser }  = require('../../util/user');
+const  { create, findAll, updateUser, deleteUser }  = require('../../util/user');
 
 module.exports.findAll = async (req, res) => {
     const users = await findAll();
@@ -21,9 +21,7 @@ module.exports.create = async (req, res) => {
 }
 
 module.exports.delete = async (req, res) => {
-    const id = {
-        id: 6
-    };
+    const id = { id: 6 };
 
    const user = await deleteUser(id)
    .then( () => res.json({ delete: true}))
@@ -32,9 +30,7 @@ module.exports.delete = async (req, res) => {
 }
 
 module.exports.update = async (req, res) => {
-    const id = {
-        id: 100
-    };
+    const id = { id: 100 };
     const body = {
         fullname: 'Jasnel Juillet Etienne',
         email: 'jasnel.services@gmail.com'
