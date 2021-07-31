@@ -8,6 +8,7 @@ app.get('/', (req, res) => res.json({ succes: true }));
 app.get('/api/users', user.findAll);
 app.post('/api/users', user.create);
 app.delete('/api/users/', user.delete);
+app.put('/api/users/', user.update);
 
 const PORT = 4500 || process.env.PORT;
 app.listen(PORT, () => console.log(`Listen on port ${PORT}`));
